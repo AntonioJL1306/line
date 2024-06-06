@@ -26,12 +26,8 @@ void setup() {
 	// Configurar Timer0 para PWM, modo Fast PWM, prescaler 64
 	TCCR0A = (1 << WGM00) | (1 << WGM01) | (1 << COM0A1) | (1 << COM0B1);
 	TCCR0B = (1 << CS01) | (1 << CS00);
-
-	// Inicializar sensores y PID
 	sensors_init();
-	pid_init(3, 0, 1); // Valores ajustados para mayor velocidad y estabilidad
-
-	// Habilitar interrupciones globales
+	pid_init(2.5, 0.05, 3); // Valores ajustados para mayor velocidad y estabilidad
 	sei();
 }
 
@@ -71,7 +67,7 @@ int main(void) {
 		int correction = pid_calculate(0, error);
 
 		// Ajustar la velocidad de los motores
-		int16_t baseSpeed = 200; // Incremento del valor base para mayor velocidad
+		int16_t baseSpeed = 100; // Incremento del valor base para mayor velocidad
 		int16_t leftSpeed = baseSpeed - correction;
 		int16_t rightSpeed = baseSpeed + correction;
 
