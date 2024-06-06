@@ -27,7 +27,7 @@ void setup() {
 	TCCR0A = (1 << WGM00) | (1 << WGM01) | (1 << COM0A1) | (1 << COM0B1);
 	TCCR0B = (1 << CS01) | (1 << CS00);
 	sensors_init();
-	pid_init(2.5, 0.05, 3); // Valores ajustados para mayor velocidad y estabilidad
+	pid_init(1.5, 0.02, 2); // Valores ajustados para mayor velocidad y estabilidad
 	sei();
 }
 
@@ -67,7 +67,7 @@ int main(void) {
 		int correction = pid_calculate(0, error);
 
 		// Ajustar la velocidad de los motores
-		int16_t baseSpeed = 100; // Incremento del valor base para mayor velocidad
+		int16_t baseSpeed = 120; // Incremento del valor base para mayor velocidad
 		int16_t leftSpeed = baseSpeed - correction;
 		int16_t rightSpeed = baseSpeed + correction;
 

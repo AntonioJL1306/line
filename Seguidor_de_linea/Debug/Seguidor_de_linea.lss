@@ -112,12 +112,12 @@ void setup() {
   a2:	85 bd       	out	0x25, r24	; 37
 	sensors_init();
   a4:	0e 94 21 01 	call	0x242	; 0x242 <sensors_init>
-	pid_init(2.5, 0.05, 3); // Valores ajustados para mayor velocidad y estabilidad
-  a8:	43 e0       	ldi	r20, 0x03	; 3
+	pid_init(1.5, 0.02, 2); // Valores ajustados para mayor velocidad y estabilidad
+  a8:	42 e0       	ldi	r20, 0x02	; 2
   aa:	50 e0       	ldi	r21, 0x00	; 0
   ac:	60 e0       	ldi	r22, 0x00	; 0
   ae:	70 e0       	ldi	r23, 0x00	; 0
-  b0:	82 e0       	ldi	r24, 0x02	; 2
+  b0:	81 e0       	ldi	r24, 0x01	; 1
   b2:	90 e0       	ldi	r25, 0x00	; 0
   b4:	0e 94 d7 00 	call	0x1ae	; 0x1ae <pid_init>
 	sei();
@@ -278,15 +278,15 @@ int main(void) {
  192:	0e 94 e4 00 	call	0x1c8	; 0x1c8 <pid_calculate>
 
 		// Ajustar la velocidad de los motores
-		int16_t baseSpeed = 100; // Incremento del valor base para mayor velocidad
+		int16_t baseSpeed = 120; // Incremento del valor base para mayor velocidad
 		int16_t leftSpeed = baseSpeed - correction;
 		int16_t rightSpeed = baseSpeed + correction;
  196:	bc 01       	movw	r22, r24
- 198:	6c 59       	subi	r22, 0x9C	; 156
+ 198:	68 58       	subi	r22, 0x88	; 136
  19a:	7f 4f       	sbci	r23, 0xFF	; 255
 
 		setMotorSpeed(leftSpeed, rightSpeed);
- 19c:	24 e6       	ldi	r18, 0x64	; 100
+ 19c:	28 e7       	ldi	r18, 0x78	; 120
  19e:	30 e0       	ldi	r19, 0x00	; 0
  1a0:	a9 01       	movw	r20, r18
  1a2:	48 1b       	sub	r20, r24
